@@ -8,16 +8,16 @@
  * @returns {string}
  */
 function formatDate(date, fromFormat, toFormat) {
-  const fromFormatSeparator = fromFormat.pop();
-  const toFormatSeparator = toFormat.pop();
+  const fromFormatSeparator = fromFormat[3];
+  const toFormatSeparator = toFormat[3];
   const dateObject = {};
   const result = [];
 
-  for (let i = 0; i < fromFormat.length; i++) {
+  for (let i = 0; i < fromFormat.length - 1; i++) {
     dateObject[fromFormat[i]] = date.split(fromFormatSeparator)[i];
   }
 
-  for (let i = 0; i < toFormat.length; i++) {
+  for (let i = 0; i < toFormat.length - 1; i++) {
     if (toFormat[i] === 'YYYY') {
       if (dateObject['YYYY']) {
         result.push(dateObject['YYYY']);
@@ -30,11 +30,7 @@ function formatDate(date, fromFormat, toFormat) {
       }
     } else if (toFormat[i] === 'YY') {
       if (dateObject['YY']) {
-        if (dateObject['YY'] >= 30) {
-          result.push('19' + dateObject['YY']);
-        } else {
-          result.push('20' + dateObject['YY']);
-        }
+        result.push(dateObject['YY']);
       } else {
         result.push(dateObject['YYYY'].slice(-2));
       }
