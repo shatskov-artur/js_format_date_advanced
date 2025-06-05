@@ -32,7 +32,9 @@ function formatDate(date, fromFormat, toFormat) {
       if (dateObject['YY']) {
         result.push(dateObject['YY']);
       } else {
-        result.push(dateObject['YYYY'].slice(-2));
+        const temp = `${dateObject['YYYY']}`;
+
+        result.push(temp.slice(-2));
       }
     } else if (toFormat[i] === 'MM') {
       result.push(dateObject['MM']);
